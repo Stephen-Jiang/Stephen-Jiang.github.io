@@ -1,0 +1,54 @@
+title: "My Jekyll Blog"
+description: "Powered by Minimal Mistakes"
+url: "https://yourusername.github.io"
+baseurl: ""  # Leave empty for user/organization site
+
+remote_theme: "mmistakes/minimal-mistakes@4.27.1"
+
+minimal_mistakes_skin: "default"
+
+plugins:
+  - jekyll-include-cache
+
+markdown: kramdown
+highlighter: rouge
+permalink: /:categories/:title/
+
+# Author
+author:
+  name: "Your Name"
+  avatar: "/assets/images/avatar.jpg"
+  bio: "A short bio goes here"
+  location: "Earth"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/yourusername"
+
+# Pagination (home page only)
+paginate: 5
+paginate_path: "/page:num/"
+
+# Archives
+category_archive:
+  type: liquid
+  path: /categories/
+tag_archive:
+  type: liquid
+  path: /tags/
+
+# Layout defaults
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: single
+      read_time: true
+      comments: false
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: single
+      author_profile: true
