@@ -1,8 +1,8 @@
 ---
-title: "Hello World"
+title: "Hello World!"
 date: 2025-06-01
-categories: blog
-tags: git jekyll minimal-mistakes
+categories: Other
+tags: Other
 ---
 
-Hello World
+Hello World!
