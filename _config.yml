@@ -1,11 +1,11 @@
-title: "My Jekyll Blog"
-description: "Powered by Minimal Mistakes"
-url: "https://yourusername.github.io"
+title: "Stephen Jiang"
+description: "The Intersection of Software Enginerring, Finance, Data Science, and Economics"
+url: "https://stephen-jiang.github.io/"
 baseurl: ""  # Leave empty for user/organization site
 
 remote_theme: "mmistakes/minimal-mistakes@4.27.1"
 
-minimal_mistakes_skin: "default"
+minimal_mistakes_skin: "dark"
 
 plugins:
   - jekyll-include-cache
@@ -16,14 +16,14 @@ permalink: /:categories/:title/
 
 # Author
 author:
-  name: "Your Name"
+  name: "Stephen Jiang"
   avatar: "/assets/images/avatar.jpg"
-  bio: "A short bio goes here"
+  bio: "The Intersection of Software Enginerring, Finance, Data Science, and Economics"
   location: "Earth"
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/yourusername"
+      url: "https://github.com/Stephen-Jiang"
 
 # Pagination (home page only)
 paginate: 5
