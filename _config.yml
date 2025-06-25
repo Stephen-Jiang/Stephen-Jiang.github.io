@@ -46,6 +46,7 @@ defaults:
       layout: single
       read_time: true
       comments: false
+      author_profile: true
   - scope:
       path: ""
       type: "pages"
