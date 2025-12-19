@@ -1,7 +1,7 @@
 title: "Stephen Jiang - Stochastic Spinnakers"
 description: "The Intersection of Software Enginerring, Finance, Data Science, and Economics"
 masthead_title: "Stochastic Spinnakers"
-url: "https://stephenjiang.io/"
+url: "https://stephenjiang.io"
 baseurl: ""  # Leave empty for user/organization site
 
 remote_theme: "mmistakes/minimal-mistakes@4.27.1"
