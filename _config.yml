@@ -4,7 +4,7 @@ masthead_title: "Stochastic Spinnakers"
 url: "https://stephenjiang.io"
 baseurl: ""  # Leave empty for user/organization site
 
-remote_theme: "mmistakes/minimal-mistakes@4.27.1"
+remote_theme: "mmistakes/minimal-mistakes@4.27.3"
 
 minimal_mistakes_skin: "dark"
 
