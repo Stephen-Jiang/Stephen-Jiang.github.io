@@ -1,0 +1,38 @@
+version: 2
+updates:
+  - package-ecosystem: "bundler"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+
+    # Group updates to reduce PR noise
+    groups:
+      jekyll-plugins:
+        patterns:
+          - "jekyll-*"
+        update-types:
+          - "minor"
+          - "patch"
+
+      dependencies:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "jekyll-*"
+          - "minimal-mistakes-jekyll"
+        update-types:
+          - "patch"
+
+    # Ignore pre-release versions and major updates
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+
+    # Use conservative versioning
+    versioning-strategy: increase-if-necessary
+
+    # Limit open PRs
+    open-pull-requests-limit: 5
