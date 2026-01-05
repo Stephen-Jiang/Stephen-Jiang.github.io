@@ -300,24 +300,13 @@ Resolver validates entire chain
 
 ### Why DNSSEC Matters
 
-DNSSEC protects all DNS-dependent security mechanisms. Without it, attackers who poison DNS could:
+DNSSEC protects all DNS-dependent security mechanisms by preventing:
 
-- Serve fraudulent **SPF/DKIM/DMARC records** to bypass email authentication
-- Redirect **HTTPS traffic** to malicious servers (certificate validation catches this, but not all applications validate properly)
-- Intercept **API traffic** by redirecting service endpoints
-- Compromise **certificate issuance** by responding to DNS-01 ACME challenges with attacker-controlled infrastructure
+- **Email authentication bypass** - Attackers cannot serve fraudulent SPF/DKIM/DMARC records
+- **Traffic redirection** - HTTPS and API traffic cannot be silently redirected to malicious servers
+- **Certificate hijacking** - Attackers cannot respond to DNS-01 ACME challenges to obtain fraudulent certificates
 
 DNSSEC ensures the integrity of DNS responses that other security systems depend on.
-
-### Enabling DNSSEC
-
-Most DNS providers (Cloudflare, Route 53, Google Cloud DNS) offer one-click DNSSEC:
-
-1. Enable DNSSEC in your DNS provider's dashboard
-2. Copy the generated DS record to your domain registrar
-3. Registrar publishes DS record in the parent zone
-
-Test with: `dig +dnssec yourdomain.com` (look for the **AD** flag indicating validated response)
 
 ## Best Practices for DNS Management
 
