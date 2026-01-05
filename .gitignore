@@ -4,3 +4,5 @@ _site
 .jekyll-metadata
 vendor
 CLAUDE.md
+USER.md
+SETUP.md

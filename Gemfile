@@ -1,5 +1,9 @@
 source "https://rubygems.org"
 
+# Required for Ruby 3.4+ (no longer in default gems)
+gem "base64"
+gem "bigdecimal"
+
 gem "jekyll", "~> 3.10.0"
 gem "minimal-mistakes-jekyll", "~> 4.27"
 gem "kramdown-parser-gfm"
