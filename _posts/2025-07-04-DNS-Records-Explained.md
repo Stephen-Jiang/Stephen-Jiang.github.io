@@ -1,7 +1,7 @@
 ---
 title: "DNS Records Explained: A Complete Guide to A, AAAA, CNAME, MX, TXT and More"
 date: 2025-07-04
-last_modified_at: 2025-12-20
+last_modified_at: 2026-01-04
 categories: Sysadmin
 tags: [DNS, Networking, Web Development, Cybersecurity]
 ---
@@ -255,6 +255,69 @@ Specify the location of specific services:
 ```
 _sip._tcp.example.com.    IN    SRV    10    5    5060    sipserver.example.com.
 ```
+
+## DNSSEC - Authenticating DNS Itself
+
+While SPF, DKIM, and DMARC protect email, **DNSSEC (Domain Name System Security Extensions)** protects DNS infrastructure itself by adding cryptographic signatures to DNS records.
+
+### The Problem
+
+Traditional DNS has no authentication. When your computer asks "What's the IP for bank.com?", it trusts whatever response arrives first. This enables **DNS cache poisoning**—attackers inject fraudulent records into resolver caches, redirecting users to malicious servers while the browser shows the legitimate domain name.
+
+### How DNSSEC Works
+
+DNSSEC creates a **chain of trust** using public-key cryptography:
+
+1. Domain owners sign their DNS records with private keys
+2. Public keys are published as DNSKEY records
+3. Key hashes (DS records) are published in parent zones
+4. Resolvers validate signatures from root zone down to domain
+
+```
+Root Zone (.) → Signs .com DS record
+    ↓
+.com TLD → Signs example.com DS record
+    ↓
+example.com → Signs A, MX, TXT records
+    ↓
+Resolver validates entire chain
+```
+
+### Key DNSSEC Records
+
+- **DNSKEY** - Public keys for signature verification
+- **DS** - Key hash published in parent zone (chain of trust)
+- **RRSIG** - Cryptographic signature for each record set
+- **NSEC/NSEC3** - Authenticated proof that a record doesn't exist
+
+### Attack Scenarios Blocked
+
+**DNS Cache Poisoning:** An attacker floods a resolver with forged responses for `yourbank.com`, racing against the legitimate nameserver. If a forged response is accepted first, all users of that resolver are redirected to a phishing site displaying the real domain name. **With DNSSEC:** Forged responses lack valid cryptographic signatures. The resolver validates the signature chain and rejects unsigned responses, making cache poisoning computationally infeasible.
+
+**BGP Hijacking + DNS Interception:** An attacker announces fraudulent BGP routes to intercept DNS traffic destined for authoritative nameservers. All intercepted queries return attacker-controlled IP addresses. **With DNSSEC:** Even when attackers intercept and respond to DNS queries, they cannot forge valid signatures without the domain's private keys. Resolvers reject the unsigned responses.
+
+**Compromised Resolver:** A user connects to malicious public WiFi or a compromised ISP where the DNS resolver is controlled by an attacker. All DNS queries return attacker-specified IPs. **With DNSSEC:** End-to-end cryptographic validation means even a compromised resolver cannot forge responses. DNSSEC-validating resolvers reject records that fail signature verification.
+
+### Why DNSSEC Matters
+
+DNSSEC protects all DNS-dependent security mechanisms. Without it, attackers who poison DNS could:
+
+- Serve fraudulent **SPF/DKIM/DMARC records** to bypass email authentication
+- Redirect **HTTPS traffic** to malicious servers (certificate validation catches this, but not all applications validate properly)
+- Intercept **API traffic** by redirecting service endpoints
+- Compromise **certificate issuance** by responding to DNS-01 ACME challenges with attacker-controlled infrastructure
+
+DNSSEC ensures the integrity of DNS responses that other security systems depend on.
+
+### Enabling DNSSEC
+
+Most DNS providers (Cloudflare, Route 53, Google Cloud DNS) offer one-click DNSSEC:
+
+1. Enable DNSSEC in your DNS provider's dashboard
+2. Copy the generated DS record to your domain registrar
+3. Registrar publishes DS record in the parent zone
+
+Test with: `dig +dnssec yourdomain.com` (look for the **AD** flag indicating validated response)
 
 ## Best Practices for DNS Management
 
