@@ -1,7 +1,7 @@
 ---
 title: "Git Naming Conventions: Commits and Branches"
 date: 2026-02-08
-categories: Software Engineering
+categories: Software-Engineering
 tags: [Git, Best-Practices, Quick-Reference]
 ---
 
