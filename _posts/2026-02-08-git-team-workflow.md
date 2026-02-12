@@ -1,7 +1,7 @@
 ---
 title: "Professional Git Workflow for Teams"
 date: 2026-02-08
-categories: Software Engineering
+categories: Software-Engineering
 tags: [Git, Best-Practices, Quick-Reference]
 ---
 
